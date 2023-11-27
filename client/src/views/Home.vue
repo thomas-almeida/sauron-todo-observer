@@ -1,7 +1,9 @@
 <template>
+  <CreateModal />
   <TaskList />
 </template>
 
 <script setup>
-  import TaskList from '@/components/TaskList.vue'
+import CreateModal from '@/components/CreateModal.vue';
+import TaskList from '@/components/TaskList.vue'
 </script>

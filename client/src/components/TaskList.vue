@@ -11,7 +11,7 @@
   </template>
   
   <script setup>
-  import { ref, onMounted } from 'vue'
+  import { ref, onMounted, onBeforeUpdate } from 'vue'
   import { useAppStore } from '../store/app'
   
   const store = useAppStore()
@@ -20,6 +20,7 @@
   onMounted(async () => {
     await store.fetchTasks()
     tasks.value = store.getTasks
-  });
+  })
+
   </script>
   
