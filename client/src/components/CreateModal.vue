@@ -1,7 +1,7 @@
 <template>
   <v-dialog width="500" v-model="isActive">
     <template v-slot:activator="{ props }">
-      <v-btn v-bind="props" text="Add Tarefa"> </v-btn>
+      <v-btn v-bind="props" text="Add Tarefa" color="#5865f2"> </v-btn>
     </template>
 
     <template v-slot:default="{ isActive }">
@@ -15,8 +15,8 @@
           <v-textarea clearable label="Descrição" variant="outlined" v-model="taskForm.details"></v-textarea>
         </div>
           <div class="spaced-buttons">
-            <v-btn text="Voltar" @click="close" height="48"></v-btn>
-            <v-btn text="Criar Tarefa" :loading="loading" @click="createTask" height="48"></v-btn>
+            <v-btn text="Voltar" @click="close" height="48" color="#DDD"></v-btn>
+            <v-btn text="Criar Tarefa" :loading="loading" @click="createTask" height="48" color="#5865f2"></v-btn>
           </div>
       </v-card>
     </template>
