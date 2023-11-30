@@ -16,7 +16,7 @@
         </v-card-text>
         <div class="p-10">
           <v-text-field clearable label="Título" variant="outlined" v-model="taskForm.title"></v-text-field>
-          <v-text-field clearable label="Tempo Limite" variant="outlined" v-model="taskForm.deadline"></v-text-field>
+          <v-text-field clearable label="Tempo Limite" variant="outlined" v-model="taskForm.deadline" @input="applyDateMask"></v-text-field>
           <v-textarea clearable label="Descrição" variant="outlined" v-model="taskForm.details"></v-textarea>
         </div>
         <div class="spaced-buttons">
@@ -32,6 +32,8 @@
 
 <script>
 import { useAppStore } from '@/store/app'
+import dateMask from '@/mods/masks' 
+import convertDateMod from '@/mods/date';
 
 export default {
   props: {
@@ -72,7 +74,7 @@ export default {
       if (this.isEditing && this.actualTask) {
         this.taskForm.title = this.actualTask.title
         this.taskForm.details = this.actualTask.details
-        this.taskForm.deadline = this.actualTask.deadline
+        this.taskForm.deadline = convertDateMod(this.actualTask.deadline)
       }
     },
     async setCreate() {
@@ -84,6 +86,9 @@ export default {
       setTimeout(() => (this.loading = false), 2000);
       await useAppStore().updateTask(this.actualTask?.id, this.taskForm)
       this.isActive = false;
+    },
+    applyDateMask() {
+      this.taskForm.deadline = dateMask(this.taskForm.deadline)
     }
   }
 }

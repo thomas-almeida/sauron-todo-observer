@@ -8,7 +8,7 @@
             <v-card class="card-details-content">
                 <div class="card-details">
                     <h1>{{ cardTitle }}</h1>
-                    <h3>{{ cardDetails }}</h3>
+                    <p>{{ cardDetails }}</p>
                     <span class="deadline">{{ `${formatDate(cardDeadline)} - ${getStatusComputed}` }}</span>
                     <v-card-actions>
                         <v-spacer></v-spacer>
@@ -97,9 +97,10 @@ export default {
     padding: 10px 0px;
 }
 
-.card-details h3 {
+.card-details p {
     padding: 10px 0px;
     margin-bottom: 10px;
+    font-size: 1.2em;
 }
 
 .deadline {
