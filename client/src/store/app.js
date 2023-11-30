@@ -15,7 +15,7 @@ export const useAppStore = defineStore('app', {
       const createdTask = await taskService.createTask(taskData);
       this.tasks = [...this.tasks, createdTask]
     },
-    async updateTask({ taskId, taskData }) {
+    async updateTask( taskId, taskData ) {
       const updatedTask = await taskService.updateTask(taskId, taskData);
       const index = this.tasks.findIndex((task) => task.id === updatedTask.id)
       if (index !== -1) {

@@ -3,7 +3,11 @@
     <div class="container-content">
       <div class="heading">
         <h1>Welcome back, <b>user</b></h1>
-        <CreateModal />
+        <CreateModal 
+          :head-text="'Nova Tarefa'" 
+          :button-text="'Criar Nova Tarefa'"
+          :details-text="'Defina os dados da nova tarefa'"
+        />
       </div>
       <TaskList />
     </div>
@@ -20,15 +24,15 @@ import TaskList from '@/components/TaskList.vue'
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px;
   height: 100vh;
 }
 
 .container-content {
-  width: 70%;
+  width: 75%;
 }
 
 .heading {
   padding: 5px 35px;
+  margin-bottom: 4rem;
 }
 </style>

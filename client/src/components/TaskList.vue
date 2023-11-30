@@ -3,36 +3,61 @@
     <v-list-item v-for="task in tasks" :key="task.id" :title="task.title" :subtitle="task.details" class="task-item">
       <br>
       <v-btn icon="mdi-delete" variant="plain" @click="deleteTask(task.id)"></v-btn>
-      <v-btn icon="mdi-pencil" variant="plain"></v-btn>
+      <CreateModal
+        :isEditing="edit"
+        :headText="'Editar'"
+        :detailsText="'Edite os campos da tarefa e salve as alterações'"
+        :buttonText="'Salvar Alterações'"
+        :actualTask="task"
+      />
       <v-btn icon="mdi-check-circle" variant="plain"></v-btn>
+      <CardDetails
+        :cardTitle="task.title"
+        :cardDetails="task.details"
+        :cardDeadline="task.deadline"
+      />
       <span class="anchor-right">
         {{ task.deadline }}
       </span>
     </v-list-item>
   </v-list>
 </template>
-  
-<script setup>
-import { ref, onMounted, onBeforeUpdate } from 'vue'
+
+<script>
 import { useAppStore } from '../store/app'
+import CreateModal from './CreateModal.vue';
+import CardDetails from './CardDetails.vue';
 
-const store = useAppStore()
-const tasks = ref([])
 
-onMounted(async () => {
-  await store.fetchTasks()
-  tasks.value = store.getTasks
-})
-
-const deleteTask = async (taskId) => {
-  await store.deleteTask(taskId)
+export default {
+    data() {
+        return {
+            store: useAppStore(),
+            tasks: [],
+            edit: true
+        };
+    },
+    mounted() {
+        this.fetchTasks();
+    },
+    methods: {
+        async fetchTasks() {
+            await this.store.fetchTasks();
+            this.tasks = this.store.getTasks;
+        },
+        async deleteTask(taskId) {
+            await this.store.deleteTask(taskId);
+            this.fetchTasks();
+        },
+    },
+    components: { CreateModal, CardDetails }
 }
-
 </script>
-  
+
 <style>
 .flex {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   justify-content: start;
   align-items: center;
   flex-wrap: wrap;
@@ -42,17 +67,22 @@ const deleteTask = async (taskId) => {
 }
 
 .task-item {
-  border: 1px solid #9c9c9c;
-  border-radius: 5px;
+  border: 1px solid #989696 !important;
+  border-radius: 5px !important;
   box-shadow: 1px 2px 4px #d5d5d5;
-  width: 30%;
+  height: 180px;
   transition: 0.2s;
+  padding: 20px !important;
 }
 
 .task-item:hover {
   transform: scale(1.06);
   cursor: pointer;
   box-shadow: 1px 2px 4px #939393;
+}
+
+.v-list {
+  padding: 20px !important;
 }
 
 .v-list-item-title {
