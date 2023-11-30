@@ -17,7 +17,7 @@
         :cardDeadline="task.deadline"
       />
       <span class="anchor-right">
-        {{ task.deadline }}
+        {{ formatDate(task.deadline) }}
       </span>
     </v-list-item>
   </v-list>
@@ -27,7 +27,7 @@
 import { useAppStore } from '../store/app'
 import CreateModal from './CreateModal.vue';
 import CardDetails from './CardDetails.vue';
-
+import convertDateMod from '@/mods/date';
 
 export default {
     data() {
@@ -49,6 +49,9 @@ export default {
             await this.store.deleteTask(taskId);
             this.fetchTasks();
         },
+        formatDate(date) {
+          return convertDateMod(date)
+        }
     },
     components: { CreateModal, CardDetails }
 }
