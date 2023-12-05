@@ -5,11 +5,11 @@
         <v-btn v-bind="props" icon="mdi-pencil" variant="plain"></v-btn>
       </span>
       <span v-if="!isEditing">
-        <v-btn v-bind="props" text="Add Tarefa" color="#5865f2"> </v-btn>
+        <v-btn v-bind="props" text="Criar" color="#5865f2"> </v-btn>
       </span>
     </template>
 
-    <template v-slot:default="{ isActive }">
+    <template v-slot:default="">
       <v-card :title="headText">
         <v-card-text>
           {{ detailsText }}
